@@ -1,6 +1,5 @@
 import { useState } from "react";
 import { motion } from "framer-motion";
-
 import { useNavigate } from "react-router-dom";
 
 import {
@@ -47,6 +46,7 @@ export const Menu = ({selection, setSelection}) => {
 
   const onLogout = () => {
     // write code for logout and clear local data as well
+    localStorage.clear();
     navigate("/");
   }
 

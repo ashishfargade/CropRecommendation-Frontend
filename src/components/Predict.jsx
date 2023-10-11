@@ -2,7 +2,8 @@ import React from "react";
 
 export const Predict = () => {
 
-  const prediction = null
+  const prediction = 0
+
 // After fetching the prediction assign it to this value.
 
   return (

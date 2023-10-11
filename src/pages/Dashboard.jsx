@@ -8,7 +8,7 @@ export const Dashboard = () => {
 
     const [selection, setSelection] = useState(() => {
       const storedSelection = localStorage.getItem('selection');
-      return storedSelection ? parseInt(storedSelection) : 1;
+      return storedSelection ? parseInt(storedSelection) : 0;
     }
     ) ;
 
