@@ -1,9 +1,26 @@
-import React from "react";
+import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { AiOutlineRollback } from "react-icons/ai";
 
 export const Login = ({ setNewUser }) => {
   const navigate = useNavigate();
+
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+
+  const onChangeE = (e) => {
+    setEmail(e.target.value);
+  }
+
+  const onChangeP = (e) => {
+    setPassword(e.target.value);
+  }
+
+  const onSubmit = (e) => {
+    e.preventDefault();
+    console.log(email);
+    console.log(password);
+  }
 
   return (
     <div className="flex flex-col w-1/2 h-full">
@@ -17,7 +34,7 @@ export const Login = ({ setNewUser }) => {
         </div>
       </div>
 
-      <form class="flex flex-col h-full  justify-center">
+      <form onSubmit={onSubmit} class="flex flex-col h-full justify-center">
         <div class="flex items-center mb-6">
           <div class="w-1/3">
             <label
@@ -32,6 +49,8 @@ export const Login = ({ setNewUser }) => {
               class="bg-gray-200 appearance-none border-2 border-gray-200 rounded w-full py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-green-500"
               id="inline-email"
               type="email"
+              value={email}
+              onChange={onChangeE}
               placeholder="abc@gmail.com"
               required
             />
@@ -51,6 +70,8 @@ export const Login = ({ setNewUser }) => {
               class="bg-gray-200 appearance-none border-2 border-gray-200 rounded w-full py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-green-500"
               id="inline-password"
               type="password"
+              value={password}
+              onChange={onChangeP}
               placeholder="******************"
               required
             />
