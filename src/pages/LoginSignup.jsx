@@ -17,7 +17,7 @@ export const LoginSignup = () => {
         </div>
   
         {
-          newUser ? <Signup setNewUser={setNewUser}/> : <Login setNewUser={setNewUser}/>
+          newUser ? <Signup/> : <Login setNewUser={setNewUser}/>
         }
 
       </div>

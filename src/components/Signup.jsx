@@ -1,11 +1,29 @@
-import React from "react";
+import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { country_list } from "../data/countryList";
 import { AiOutlineRollback } from "react-icons/ai";
 
-export const Signup = ({setNewUser}) => {
+export const Signup = () => {
   const countries = country_list;
   const navigate = useNavigate();
+
+  const [formData, setFormData] = useState({
+    fullName: "",
+    email: "",
+    area: 0,
+    country: "India",
+    zip: null,
+  });
+
+  const handleChange = (e) => {
+    const {name, value} = e.target;
+    setFormData((prevFormData)=> ({...prevFormData, [name]: value}))
+  };
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    console.log(formData);
+  };
 
   return (
     <div className="flex flex-col w-1/2 h-full px-5">
@@ -17,12 +35,12 @@ export const Signup = ({setNewUser}) => {
         />
       </div>
       <div className="flex flex-col w-full h-full justify-evenly lg:pr-9">
-        <form>
+        <form method="post" onSubmit={handleSubmit}>
           <div class="flex items-center w-full mb-6">
             <div class="w-1/3">
               <label
                 class="block text-center text-gray-500 font-bold mb-1 pr-4"
-                for="inline-full-name"
+                for="inline-fullName"
               >
                 Full Name
               </label>
@@ -30,9 +48,11 @@ export const Signup = ({setNewUser}) => {
             <div class="w-2/3">
               <input
                 class="bg-gray-200 appearance-none border-2 border-gray-200 rounded w-full py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-green-500"
-                id="inline-full-name"
+                id="inline-fullName"
+                name="fullName"
                 type="text"
                 placeholder="John Doe"
+                onChange={handleChange}
                 required
               />
             </div>
@@ -42,7 +62,7 @@ export const Signup = ({setNewUser}) => {
             <div class="w-1/3">
               <label
                 class="block text-center text-gray-500 font-bold mb-1 pr-4"
-                for="inline-full-name"
+                for="inline-email"
               >
                 Email
               </label>
@@ -50,9 +70,11 @@ export const Signup = ({setNewUser}) => {
             <div class="w-2/3">
               <input
                 class="bg-gray-200 appearance-none border-2 border-gray-200 rounded w-full py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-green-500"
-                id="inline-full-name"
+                id="inline-email"
+                name="email"
                 type="email"
                 placeholder="abc@gmail.com"
+                onChange={handleChange}
                 required
               />
             </div>
@@ -62,7 +84,7 @@ export const Signup = ({setNewUser}) => {
             <div class="w-1/3">
               <label
                 class="block text-center text-gray-500 font-bold mb-1 pr-4"
-                for="inline-full-name"
+                for="inline-password"
               >
                 Set Password
               </label>
@@ -70,9 +92,11 @@ export const Signup = ({setNewUser}) => {
             <div class="w-2/3">
               <input
                 class="bg-gray-200 appearance-none border-2 border-gray-200 rounded w-full py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-green-500"
-                id="inline-full-name"
+                id="inline-password"
+                name="password"
                 type="password"
                 placeholder="********"
+                onChange={handleChange}
                 required
               />
             </div>
@@ -82,7 +106,7 @@ export const Signup = ({setNewUser}) => {
             <div class="w-1/3">
               <label
                 class="block text-center text-gray-500 font-bold mb-1 pr-4"
-                for="inline-full-name"
+                for="inline-area"
               >
                 Your Farm Area
               </label>
@@ -90,9 +114,11 @@ export const Signup = ({setNewUser}) => {
             <div class="w-2/3">
               <input
                 class="bg-gray-200 appearance-none border-2 border-gray-200 rounded w-full py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-green-500"
-                id="inline-full-name"
+                id="inline-area"
+                name="area"
                 type="number"
                 placeholder="In metres square"
+                onChange={handleChange}
                 required
               />
             </div>
@@ -103,7 +129,7 @@ export const Signup = ({setNewUser}) => {
               <div class="w-2/5">
                 <label
                   class="block text-center text-gray-500 font-bold mb-1"
-                  for="inline-full-name"
+                  for="inline-country"
                 >
                   Country
                 </label>
@@ -111,7 +137,9 @@ export const Signup = ({setNewUser}) => {
               <div class="w-3/5">
                 <select
                   class="bg-gray-200 appearance-none border-2 border-gray-200 rounded w-full py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-green-500"
-                  id="inline-full-name"
+                  id="inline-country"
+                  name="country"
+                  onChange={handleChange}
                   defaultValue={"India"}
                 >
                   {countries.map((country, id) => (
@@ -125,7 +153,7 @@ export const Signup = ({setNewUser}) => {
               <div class="w-1/3">
                 <label
                   class="block text-center text-gray-500 font-bold mb-1"
-                  for="inline-full-name"
+                  for="inline-zip"
                 >
                   Zip Code
                 </label>
@@ -133,9 +161,10 @@ export const Signup = ({setNewUser}) => {
               <div class="w-2/3">
                 <input
                   class="bg-gray-200 appearance-none border-2 border-gray-200 rounded w-full py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-green-500"
-                  id="inline-full-name"
+                  id="inline-zip"
+                  name="zip"
+                  onChange={handleChange}
                   type="text"
-                  placeholder=""
                 />
               </div>
             </div>
