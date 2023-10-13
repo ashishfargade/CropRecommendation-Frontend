@@ -2,6 +2,8 @@ import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { country_list } from "../data/countryList";
 import { AiOutlineRollback } from "react-icons/ai";
+import { createUserWithEmailAndPassword } from "firebase/auth";
+import { auth } from "../Firebase";
 
 export const Signup = () => {
   const countries = country_list;
@@ -10,6 +12,7 @@ export const Signup = () => {
   const [formData, setFormData] = useState({
     fullName: "",
     email: "",
+    password: "",
     area: 0,
     country: "India",
     zip: null,
@@ -20,9 +23,21 @@ export const Signup = () => {
     setFormData((prevFormData)=> ({...prevFormData, [name]: value}))
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     console.log(formData);
+
+    await createUserWithEmailAndPassword(auth, formData.email, formData.password)
+      .then((userCreds) => {
+        const user = userCreds.user;
+        console.log(user);
+        navigate("/login");
+      } )
+      .catch((error) => {
+        const errorCode = error.code;
+        const errorMessage = error.message;
+        console.log(errorCode, errorMessage);
+      } )
   };
 
   return (

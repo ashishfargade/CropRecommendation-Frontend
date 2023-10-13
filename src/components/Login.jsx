@@ -1,6 +1,8 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { AiOutlineRollback } from "react-icons/ai";
+import { signInWithEmailAndPassword } from "firebase/auth";
+import { auth } from "../Firebase";
 
 export const Login = ({ setNewUser }) => {
   const navigate = useNavigate();
@@ -20,6 +22,13 @@ export const Login = ({ setNewUser }) => {
     e.preventDefault();
     console.log(email);
     console.log(password);
+
+    signInWithEmailAndPassword(auth, email, password)
+      .then((userCreds) => {
+        const user = userCreds.user;
+        navigate("/dashboard");
+        console.log(user);
+      })
   }
 
   return (

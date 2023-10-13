@@ -2,7 +2,8 @@
 import React, { useEffect, useState } from 'react'
 import MainContent from '../components/MainContent'
 import { Menu } from '../components/Menu'
-import Footer from '../components/Footer';
+import { onAuthStateChanged } from 'firebase/auth';
+import { auth } from '../Firebase';
 
 export const Dashboard = () => {
 
@@ -16,6 +17,17 @@ export const Dashboard = () => {
       // Save the count in localStorage whenever it changes
       localStorage.setItem('selection', selection.toString());
     }, [selection]);
+
+    useEffect(()=> {
+      onAuthStateChanged(auth, (user) => {
+        if(user){
+          const uid = user.uid;
+          console.log("uid", uid);
+        }else{
+          console.log("user logged out");
+        }
+      })
+    }, [])
 
   return (
 
