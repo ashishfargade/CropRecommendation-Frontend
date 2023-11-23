@@ -9,6 +9,8 @@ import {
   HelpCircleIcon,
   LogOutIcon
 } from "lucide-react"
+import { signOut } from "firebase/auth";
+import { auth } from "../Firebase";
 
 const navLinks = [
   {
@@ -47,7 +49,14 @@ export const Menu = ({selection, setSelection}) => {
   const onLogout = () => {
     // write code for logout and clear local data as well
     localStorage.clear();
-    navigate("/");
+
+    signOut(auth).then(() => {
+      navigate("/");
+      console.log("Signed out successfully")
+    }).catch((error) => {
+      console.log("error in logging out")
+    })
+
   }
 
   return (

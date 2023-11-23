@@ -13,7 +13,7 @@ const Navbar = ({logged}) => {
   return (
     <div className="w-full h-[90px] bg-green-950">
 
-      <div className="max-w-[1240px] mx-auto px-4 flex justify-between items-center h-full">
+      <div className="w-full px-14 flex justify-between items-center h-full">
         <div>
           <img className="w-[90px] rounded-lg" src="./src/assets/logos/logo-green.png"/>
         </div>
